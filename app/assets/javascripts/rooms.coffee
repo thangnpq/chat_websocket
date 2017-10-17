@@ -6,8 +6,31 @@ $ ->
   $messages.scrollTop $messages.prop('scrollHeight')
   $('#message_input').focus()
 
+
 $(document).on 'keypress', '#message_input', (e) ->
   if e.keyCode == 13 and e.target.value
-    App.room.speak(e.target.value)
+    chatroom_id = $("[data-behavior='messages']").data("chatroom-id")
+    App.room.speak(chatroom_id,e.target.value)
     e.target.value = ''
     e.preventDefault()
+# $(document).on 'keypress', '#message_input', (e) ->
+#  if e.target.value && e.keyCode == 13
+#    chatroom_id = $("[data-behavior='messages']").data("chatroom-id")
+#    App.room.speak(e.target.value,chatroom_id)
+#    e.target.value = ''
+#    e.preventDefault()
+
+# $(document).on "turbolinks:load", ->
+
+#   $("#message_input").on "keypress", (e) ->
+#     if e && e.keyCode == 13
+#       e.preventDefault()
+#       $(this).submit()
+
+#   $("#message_input").on "submit", (e) ->
+#     e.preventDefault()
+
+#     chatroom_id = $("[data-behavior='messages']").data("chatroom-id")
+#     content        = $("#message_input")
+#     App.room.speak(chatroom_id,content.val())
+#     content.val("")
